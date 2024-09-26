@@ -1,4 +1,4 @@
-## Generic text file distribution
+## Generic file distribution
 ## https://dariuslfuller.medium.com/creating-visuals-with-nltks-freqdist-ac4e667e49f3
 
 import seaborn
@@ -6,8 +6,10 @@ from matplotlib import pyplot as plt
 import pandas as pd
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
-## Uncomment these if missing packages are throwing errors
+## Uncomment the following to resolve missing package errors
+# import nltk
 # nltk.download('stopwords')
 # nltk.download('punkt_tab')
 # nltk.download('wordnet')
@@ -19,22 +21,20 @@ localPath = input()
 paper = open(localPath, "r", encoding="utf8")
 raw = paper.read()
 
-#stop_words = set(stopwords.words('english'))
-punctuation = [".", ",", "'", ":", ";", "?", "!", "(", ")", "{", "}", "[", "]", "’", "''", "``"] 
+stop_words = set(stopwords.words('english'))
+punctuation = [".", ",", "'", ":", ";", "?", "!", "(", ")", "{", "}", "[", "]", "’", "''", "``", '#', '‘'] 
 tokens = word_tokenize(raw)
 
-#notStopWords = []
-notPunctuation = []
+acceptedTokens = []
 
 ## Filter out unwanted tokens
 for word in tokens:
     if word not in punctuation:
-        notPunctuation.append(word)
-        #if word not in stop_words:
-        #   notStopWords.append(word)
+        if word not in stop_words:
+            acceptedTokens.append(word)
 
 ## Get number of tokens to display from user
-fdist = FreqDist(notPunctuation)
+fdist = FreqDist(acceptedTokens)
 print(fdist)
 print("Input number of words to display: ")
 xTopWords = input()
