@@ -1,7 +1,7 @@
 ## Generic text file distribution
 ## https://dariuslfuller.medium.com/creating-visuals-with-nltks-freqdist-ac4e667e49f3
 
-import nltk, seaborn
+import seaborn
 from matplotlib import pyplot as plt
 import pandas as pd
 from nltk import FreqDist
@@ -12,6 +12,8 @@ from nltk.tokenize import word_tokenize
 # nltk.download('punkt_tab')
 # nltk.download('wordnet')
 # nltk.download('omw-1.4')
+
+## Open file from user
 print("Input file path: ")
 localPath = input()
 paper = open(localPath, "r", encoding="utf8")
@@ -32,10 +34,22 @@ for word in tokens:
 
 fdist = FreqDist(notPunctuation)
 print(fdist)
-common = fdist.most_common()
-#print(common)
-for word in common:
-    print(word)
+print("Input number of words to display: ")
+topWords = input()
+
+try:
+    topWords = int(topWords)
+except ValueError:
+    topWords = -1
+
+if (topWords > 0):
+    common = fdist.most_common(topWords)
+    for word in common:
+        print(word)
+else:
+    common = fdist.most_common()
+    for word in common:
+        print(word)
         
 ## Convert to Pandas series via Python dictionary
 all_dist = pd.Series(dict(common))
@@ -45,6 +59,6 @@ fig, ax = plt.subplots(figsize=(10,10))
 
 ## Seaborn plotting
 plot = seaborn.barplot(x=all_dist.index, y=all_dist.values, ax=ax)
-plt.xticks(rotation=30);
+# plt.xticks(rotation=30);
 
 paper.close()
