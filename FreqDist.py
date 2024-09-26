@@ -22,7 +22,7 @@ paper = open(localPath, "r", encoding="utf8")
 raw = paper.read()
 
 stop_words = set(stopwords.words('english'))
-punctuation = [".", ",", "'", ":", ";", "?", "!", "(", ")", "{", "}", "[", "]", "’", "''", "``", '#', '‘'] 
+punctuation = [".", ",", "'", ":", ";", "?", "!", "(", ")", "{", "}", "[", "]", "’", "''", "``", "‘", "/", "<", ">", "|", "\\", "\""] 
 tokens = word_tokenize(raw)
 
 acceptedTokens = []
