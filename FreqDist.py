@@ -6,9 +6,9 @@ from matplotlib import pyplot as plt
 import pandas as pd
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
-#nltk.download('stopwords')
 
 ## Uncomment these if missing packages are throwing errors
+# nltk.download('stopwords')
 # nltk.download('punkt_tab')
 # nltk.download('wordnet')
 # nltk.download('omw-1.4')
@@ -26,24 +26,27 @@ tokens = word_tokenize(raw)
 #notStopWords = []
 notPunctuation = []
 
+## Filter out unwanted tokens
 for word in tokens:
-    #if word not in stop_words:
-     #   notStopWords.append(word)
     if word not in punctuation:
         notPunctuation.append(word)
+        #if word not in stop_words:
+        #   notStopWords.append(word)
 
+## Get number of tokens to display from user
 fdist = FreqDist(notPunctuation)
 print(fdist)
 print("Input number of words to display: ")
-topWords = input()
+xTopWords = input()
 
 try:
-    topWords = int(topWords)
+    xTopWords = int(xTopWords)
 except ValueError:
-    topWords = -1
+    xTopWords = -1
 
-if (topWords > 0):
-    common = fdist.most_common(topWords)
+## Display top x tokens
+if (xTopWords > 0):
+    common = fdist.most_common(xTopWords)
     for word in common:
         print(word)
 else:
