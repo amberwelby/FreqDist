@@ -12,8 +12,9 @@ from nltk.tokenize import word_tokenize
 # nltk.download('punkt_tab')
 # nltk.download('wordnet')
 # nltk.download('omw-1.4')
-
-paper = open("", "r", encoding="utf8")
+print("Input file path: ")
+localPath = input()
+paper = open(localPath, "r", encoding="utf8")
 raw = paper.read()
 
 #stop_words = set(stopwords.words('english'))
