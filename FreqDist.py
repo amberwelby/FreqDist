@@ -59,6 +59,7 @@ fig, ax = plt.subplots(figsize=(10,10))
 
 ## Seaborn plotting
 plot = seaborn.barplot(x=all_dist.index, y=all_dist.values, ax=ax)
-# plt.xticks(rotation=30);
+plt.xticks(rotation=30);
+plt.show()
 
 paper.close()
